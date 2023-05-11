@@ -1,9 +1,11 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
-// ignore: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:todo_app/Addtask_secrren.dart';
+
+import 'Widgets/Tasks_lis.dart';
 
 class mytask extends StatefulWidget {
   const mytask({super.key});
@@ -16,6 +18,22 @@ class _mytaskState extends State<mytask> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            showModalBottomSheet(
+              isScrollControlled: true,
+              context: context,
+              builder: (context) => SingleChildScrollView(
+                  child: Container(
+                      padding: EdgeInsets.only(
+                          bottom: MediaQuery.of(context).viewInsets.bottom),
+                      child: AddTaskScreen())),
+            );
+          },
+          backgroundColor: Colors.blue,
+          child: Icon(Icons.add),
+        ),
         backgroundColor: Color.fromARGB(255, 34, 156, 142),
         body: Container(
           padding: EdgeInsets.only(top: 60, left: 20, right: 20, bottom: 80),
@@ -50,6 +68,7 @@ class _mytaskState extends State<mytask> {
                 decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.all(Radius.circular(20))),
+                child: Tasks_list(),
               ))
             ],
           ),
