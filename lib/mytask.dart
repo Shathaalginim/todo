@@ -4,17 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:todo_app/Addtask_secrren.dart';
+import 'package:provider/provider.dart';
 
+import 'Models/Task_Data.dart';
 import 'Widgets/Tasks_lis.dart';
 
-class mytask extends StatefulWidget {
-  const mytask({super.key});
-
-  @override
-  State<mytask> createState() => _mytaskState();
-}
-
-class _mytaskState extends State<mytask> {
+class mytask extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,9 +21,15 @@ class _mytaskState extends State<mytask> {
               context: context,
               builder: (context) => SingleChildScrollView(
                   child: Container(
-                      padding: EdgeInsets.only(
-                          bottom: MediaQuery.of(context).viewInsets.bottom),
-                      child: AddTaskScreen())),
+                padding: EdgeInsets.only(
+                    bottom: MediaQuery.of(context).viewInsets.bottom),
+                child: AddTaskScreen((newTaskTitle) {
+                  // setState(() {
+                  //   tasks.add(Task(name: newTaskTitle));
+                  //   Navigator.pop(context);
+                  // });
+                }),
+              )),
             );
           },
           backgroundColor: Colors.blue,
@@ -57,7 +58,7 @@ class _mytaskState extends State<mytask> {
                 ],
               ),
               Text(
-                "4 Task",
+                '${Provider.of<TaskData>(context).tasks.length} Tasks',
                 style: TextStyle(color: Colors.white, fontSize: 20),
               ),
               SizedBox(
